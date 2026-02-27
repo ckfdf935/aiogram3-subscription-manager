@@ -28,7 +28,7 @@ async def command_start(message: types.Message):
         )
         user = res.scalar_one_or_none()
 
-        if not user: # если юзера не нашли, то записываем его в таблицу
+        if not user:
             user = User(
                 telegram_id=message.from_user.id,
                 username=message.from_user.username,
@@ -71,7 +71,7 @@ async def pre_checkout_query(query: types.PreCheckoutQuery):
 #Successful payment
 @router.message(F.successful_payment)
 async def successful_payment(message: types.Message):
-    payment = message.successful_payment # Объект successful_payment содержит все детали транзакции
+    payment = message.successful_payment 
 
     async with SessionLocal() as session:
         result = await session.execute(
@@ -158,7 +158,7 @@ async def broadcast(message: types.Message):
                     await message.bot.send_message(uid, text)
                     count += 1
                 except Exception:
-                    pass  # Если заблокировал бота
+                    pass  
 
             await message.answer(f"📢 Рассылка завершена. Получили {count} чел.")
 
