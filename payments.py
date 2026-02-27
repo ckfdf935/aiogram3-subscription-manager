@@ -6,7 +6,6 @@ from datetime import datetime, timedelta
 
 SUBSCRIPTION_DAYS = 30
 
-#Эта функция отвечает за то, чтобы время подписки приплюсовывалось корректно, а не просто перезаписывалось
 async def activate_subscription(telegram_id: int):
     async with SessionLocal() as session:
         user = await session.execute(
